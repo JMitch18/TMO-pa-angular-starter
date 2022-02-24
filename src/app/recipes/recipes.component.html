@@ -1,0 +1,26 @@
+<h1 id="recipe-header">My Recipes</h1>
+<div *ngIf="recipes.length === 0; else elseBlock">There are no recipes to list</div>
+<ng-template #elseBlock>
+    <ul *ngFor="let recipe of recipes">
+        <li>{{recipe.name}}</li>
+    </ul>
+</ng-template>
+
+<button id="add-recipes" *ngIf="!hideForm; else formBlock" (click)="addRecipe()">Add Recipe</button>
+<ng-template #formBlock>
+    <form (ngSubmit)="onSubmit()" #recipeForm="ngForm">
+        <div class="form-group">
+          <label for="recipe-name">recipe-name</label>
+          <input type="text" class="form-control" id="recipe-name" label="recipe-name"
+                 [(ngModel)]="recipe.name" name="recipe-name">
+        </div>
+  
+        <div class="form-group">
+            <label for="recipe-instructions">recipe-instructions</label>
+            <input type="text" class="form-control" id="recipe-instructions" label="recipe-instructions"
+                   [(ngModel)]="recipe.instructions" name="recipe-instructions">
+          </div>
+  
+        <button type="submit">Submit</button>
+      </form>
+</ng-template>
